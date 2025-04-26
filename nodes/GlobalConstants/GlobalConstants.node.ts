@@ -42,7 +42,7 @@ export class GlobalConstants implements INodeType {
             putAllInOneKey: [true],
           },
         },
-        description: 'The key under which all constants will be stored.',
+        description: 'The key under which all constants will be stored',
       },
       {
         displayName: 'Section Name',
