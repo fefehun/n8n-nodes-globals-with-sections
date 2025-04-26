@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-globals-with-sections",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "N8N community node that allows users to create global constants organized into sections, and use them in all their workflows for multiple users.",
   "keywords": [
     "n8n-community-node-package"
