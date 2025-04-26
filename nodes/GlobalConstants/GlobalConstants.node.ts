@@ -58,7 +58,7 @@ export class GlobalConstants implements INodeType {
         default: '',
         displayOptions: {
           show: {
-            getOnlyOneSection: [false],
+            getOnlyOneSection: [true],
           },
         },
         placeholder: 'Optional: Specify a section',
