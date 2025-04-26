@@ -45,10 +45,22 @@ export class GlobalConstants implements INodeType {
         description: 'The key under which all constants will be stored',
       },
       {
+        displayName: 'Get Only One Section',
+        name: 'getOnlyOneSection',
+        type: "boolean",
+        default: false,
+        description: "Whether get only one selected section or get all sections",
+      },      
+      {
         displayName: 'Section Name',
         name: 'sectionName',
         type: 'string',
         default: '',
+        displayOptions: {
+          show: {
+            getOnlyOneSection: [false],
+          },
+        },
         placeholder: 'Optional: Specify a section',
         description: 'Optional section name',
         hint: 'Leave empty for default behavior. Supports expressions.',
@@ -62,7 +74,9 @@ export class GlobalConstants implements INodeType {
 
     var constantsData: { [key: string]: any } = {};
 
-    const sectionName = this.getNodeParameter('sectionName', 0) as string;
+    const getOnlyOneSection = this.getNodeParameter('getOnlyOneSection', 0) as boolean;
+
+    const sectionName = getOnlyOneSection ? this.getNodeParameter('sectionName', 0) as string : "" as string ;
     const globalConstants = sectionName ? globalConstantsFull?.[sectionName] ?? {} : globalConstantsFull ?? {};
 
     const putAllInOneKey = this.getNodeParameter('putAllInOneKey', 0) as boolean;
