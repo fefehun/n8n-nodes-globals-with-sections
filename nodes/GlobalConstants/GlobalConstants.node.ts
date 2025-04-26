@@ -42,15 +42,29 @@ export class GlobalConstants implements INodeType {
             putAllInOneKey: [true],
           },
         },
+        description: 'The key under which all constants will be stored.',
       },
+      {
+        displayName: 'Section Name',
+        name: 'sectionName',
+        type: 'string',
+        default: '',
+        placeholder: 'Optional: Specify a section',
+        description: 'Optional section name. If not set, constants will be used from the root.',
+        required: false,
+        hint: 'Leave empty for default behavior. Supports expressions.',
+      },      
     ],
   };
 
   async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][] > {
     const credentials = await this.getCredentials(GLOBAL_CONSTANTS_CREDENTIALS_NAME) as unknown as GlobalConstantsCredentialsData;
-    const globalConstants = splitConstants(credentials.globalConstants);
+    const globalConstantsFull = splitConstants(credentials.globalConstants);
 
-    var constantsData : {[key: string]: any} = {};
+    var constantsData: { [key: string]: any } = {};
+
+    const sectionName = this.getNodeParameter('sectionName', 0) as string;
+    const globalConstants = sectionName ? globalConstantsFull?.[sectionName] ?? {} : globalConstantsFull ?? {};
 
     const putAllInOneKey = this.getNodeParameter('putAllInOneKey', 0) as boolean;
 

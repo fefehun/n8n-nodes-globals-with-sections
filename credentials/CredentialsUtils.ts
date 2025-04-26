@@ -1,19 +1,40 @@
-export function splitConstants(globalConstantsMultiline: string): { [key: string]: string } {
-  const lines = globalConstantsMultiline.split('\n');
-  var retArr: { [key: string]: string } = {};
-  for (const line of lines) {
-    // trim the line
-    const constant = line.trim();
-    if (!constant) {
-      continue;
-    }
-    // skip if it doesn't contain "="
-    if (!constant.includes('=')) {
-      continue;
-    }
-    // split only first "=" to allow values with "=" in them
-    const [name, ...value] = constant.split('=');
-    retArr[name.trim()] = value.join('=').trim();
-  }
-  return retArr;
+export function splitConstants(globalConstantsMultiline: string): { [key: string]: any } {
+	const lines = globalConstantsMultiline.split('\n');
+	const retObj: { [key: string]: any } = {};
+	let currentSection: string | null = null;
+
+	for (const line of lines) {
+		const trimmedLine = line.trim();
+		if (!trimmedLine) {
+			continue;
+		}
+
+		// Detect section headers like [sectionName]
+		if (trimmedLine.startsWith('[') && trimmedLine.endsWith(']')) {
+			currentSection = trimmedLine.slice(1, -1).trim();
+			if (!retObj[currentSection]) {
+				retObj[currentSection] = {};
+			}
+			continue;
+		}
+
+		// Skip if no '=' in the line
+		if (!trimmedLine.includes('=')) {
+			continue;
+		}
+
+		// Split into key and value (only at the first '=')
+		const [name, ...valueParts] = trimmedLine.split('=');
+		const nameTrimmed = name.trim();
+		const valueTrimmed = valueParts.join('=').trim();
+
+		// Store the key-value pair into the correct section or globally
+		if (currentSection) {
+			retObj[currentSection][nameTrimmed] = valueTrimmed;
+		} else {
+			retObj[nameTrimmed] = valueTrimmed;
+		}
+	}
+
+	return retObj;
 }
