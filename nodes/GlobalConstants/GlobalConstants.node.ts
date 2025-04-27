@@ -1,4 +1,4 @@
-import { IExecuteFunctions, INodeExecutionData, INodeType, INodeTypeDescription } from 'n8n-workflow';
+import { IExecuteFunctions, INodeExecutionData, INodeType, INodeTypeDescription, NodeConnectionType } from 'n8n-workflow';
 import { GLOBAL_CONSTANTS_CREDENTIALS_NAME, GlobalConstantsCredentialsData } from '../../credentials/GlobalConstantsCredentials.credentials';
 import { splitConstants } from '../../credentials/CredentialsUtils';
 
@@ -16,8 +16,8 @@ export class GlobalConstants implements INodeType {
     defaults: {
       name: 'Global Constants',
     },
-    inputs: ['main'],
-    outputs: ['main'],
+    inputs: ['main' as NodeConnectionType],
+    outputs: ['main' as NodeConnectionType],
     credentials: [
       {
         name: GLOBAL_CONSTANTS_CREDENTIALS_NAME,
