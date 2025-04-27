@@ -1,3 +1,12 @@
+## [1.0.4](https://github.com/fefehun/n8n-nodes-globals-with-sections/compare/v1.0.0...v1.0.4) (2025-04-27)
+
+### New features
+* Enhance the section handling: 
+    - when constans contains sections then you can set 
+        -   which one section will be used in workflow
+    - or
+        -   all sections will be used where each section as an array of constants
+
 ## [1.0.3](https://github.com/umanamente/n8n-nodes-globals/compare/v1.0.2...v1.0.3) (2024-10-18)
 
 

@@ -19,7 +19,13 @@ This node uses N8N Credential to store the global variables.
 2. In the node configuration, either select an existing credential or create a new one.
 3. Add the key-value pairs you want to use as global constants.
    ![Define constants](./docs/images/usage/2_define_constants.png)
+   you can use sections as you cen see here:
+   ![Define constants](./docs/images/usage/2_define_constants_with_sections.png)
 4. Use the global constants in your workflow
 	 ![Use constants](./docs/images/usage/3_use_node.png)
+    and you can use constants of one section in your workflow as you cen see here:
+   ![Use constants](./docs/images/usage/3_use_node_with_one_section.png)
+    or you can use constants all section in your workflow as you cen see here:
+   ![Use constants](./docs/images/usage/3_use_node_with_all_sections.png)
 
 
